@@ -30,14 +30,14 @@ byte Calendar[8] =
 };
 byte Thermometer[8] = //icon for termometer
 {
-    B00100,
-    B01010,
-    B01010,
-    B01110,
-    B01110,
-    B11111,
-    B11111,
-    B01110
+    0b00100,
+    0b01010,
+    0b01010,
+    0b01110,
+    0b01110,
+    0b11111,
+    0b11111,
+    0b01110
 };
 
 void setup ()
