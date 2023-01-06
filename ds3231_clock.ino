@@ -39,6 +39,18 @@
       0b11111,
       0b01110
   };
+  byte degreeCentigrade[8] = 
+  {
+    0b11000,
+    0b11000,
+    0b00110,
+    0b01001,
+    0b01000,
+    0b01000,
+    0b01001,
+    0b00110
+  };
+
 
   void setup ()
   {
@@ -50,6 +62,7 @@
       lcd.createChar(1, Clock);
       lcd.createChar(2, Calendar);
       lcd.createChar(3, Thermometer);
+      lcd.createChar(4, degreeCentigrade);      
 
   #ifndef ESP8266
       while (!Serial); // wait for serial port to connect. Needed for native USB
@@ -65,20 +78,8 @@
       if (rtc.lostPower())
       {
           Serial.println("RTC lost power, let's set the time!");
-          // When time needs to be set on a new device, or after a power loss, the
-          // following line sets the RTC to the date & time this sketch was compiled
           rtc.adjust(DateTime(F(__DATE__), F(__TIME__)));
-          // This line sets the RTC with an explicit date & time, for example to set
-          // January 21, 2014 at 3am you would call:
-          // rtc.adjust(DateTime(2014, 1, 21, 3, 0, 0));
       }
-
-      // When time needs to be re-set on a previously configured device, the
-      // following line sets the RTC to the date & time this sketch was compiled
-      // rtc.adjust(DateTime(F(__DATE__), F(__TIME__)));
-      // This line sets the RTC with an explicit date & time, for example to set
-      // January 21, 2014 at 3am you would call:
-      // rtc.adjust(DateTime(2014, 1, 21, 3, 0, 0));
   }
 
   void loop ()
@@ -89,54 +90,58 @@
       lcd.write(1);
       lcd.print(" ");
 
-      if(now.hour() > 12)
+      if(now.hour() == 0)
       {
-          long H=now.hour()-12;
-          if(H < 10)
+        lcd.print("12");
+      }
+      else if(now.hour() > 12)
+      {
+          int Hour=now.hour()-12;
+          if(Hour < 10)
           {
             lcd.print("0");
-            lcd.print(H, DEC);
+            lcd.print(Hour, DEC);
           }
           else{
-            lcd.print(H, DEC);          
+            lcd.print(Hour, DEC);          
           }
       }
       else
       {
-          long H=now.hour();
-          lcd.print(H, DEC);
+        int Hour=now.hour();
+        lcd.print(Hour, DEC);
       }
 
       lcd.print(':');
       if(now.minute() < 10)
       {
-          lcd.print("0");
-          lcd.print(now.minute(), DEC);
+        lcd.print("0");
+        lcd.print(now.minute(), DEC);
       }
       else
       {
-          lcd.print(now.minute(), DEC);
+        lcd.print(now.minute(), DEC);
       }
       lcd.print(':');
       if(now.second() < 10)
       {
-          lcd.print("0");
-          lcd.print(now.second(), DEC);
+        lcd.print("0");
+        lcd.print(now.second(), DEC);
       }
       else
       {
-          lcd.print(now.second(), DEC);
+        lcd.print(now.second(), DEC);
       }
       //AM PM srart
       if(now.hour() >= 12)
       {
-          lcd.print(" ");
-          lcd.print("PM");
+        lcd.print(" ");
+        lcd.print("PM");
       }
       else
       {
-          lcd.print(" ");
-          lcd.print("AM");
+        lcd.print(" ");
+        lcd.print("AM");
       }
       //AM PM end
 
@@ -148,36 +153,33 @@
       lcd.write(2);
       if(now.day() < 10)
       {
-          lcd.print("0");
-          lcd.print(now.day(), DEC);
+        lcd.print("0");
+        lcd.print(now.day(), DEC);
       }
       else
       {
-          lcd.print(now.day(), DEC);
+        lcd.print(now.day(), DEC);
       }
       lcd.print('/');
       if(now.month() < 10)
       {
-          lcd.print("0");
-          lcd.print(now.month(), DEC);
+        lcd.print("0");
+        lcd.print(now.month(), DEC);
       }
       else
       {
-          lcd.print(now.month(), DEC);
+        lcd.print(now.month(), DEC);
       }
-      // lcd.print('/');
-      // lcd.print(now.year(), DEC);
-
+      lcd.print('/');
+      lcd.print(now.year(), DEC);
       // date end
-
-      lcd.print(" ");
 
       lcd.print(" ");
 
       //temperature start
       lcd.write(3);
-      lcd.print(rtc.getTemperature());
-      lcd.print((char)223);
-      lcd.print("C");
+      int Temperature=(rtc.getTemperature());
+      lcd.print(Temperature);
+      lcd.write(4);
       //temperature end
   }
