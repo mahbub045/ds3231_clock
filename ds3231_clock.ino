@@ -170,8 +170,11 @@ void loop ()
     lcd.print(" ");
 
     lcd.print(" ");
+
+    //temperature start
     lcd.write(3);
     lcd.print(rtc.getTemperature());
     lcd.print((char)223);
     lcd.print("C");
+    //temperature end
 }
