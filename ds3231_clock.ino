@@ -5,6 +5,7 @@
 
   RTC_DS3231 rtc;
   LiquidCrystal_I2C lcd(0x27, 16, 2);
+  char daysOfTheWeek[7][12] = {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"};
 
   byte Clock[8] =
   {
@@ -49,7 +50,7 @@
     0b01000,
     0b01001,
     0b00110
-  };
+  }; 
 
 
   void setup ()
@@ -62,7 +63,8 @@
       lcd.createChar(1, Clock);
       lcd.createChar(2, Calendar);
       lcd.createChar(3, Thermometer);
-      lcd.createChar(4, degreeCentigrade);      
+      lcd.createChar(4, degreeCentigrade); 
+      // lcd.createChar(5, daySign);     
 
   #ifndef ESP8266
       while (!Serial); // wait for serial port to connect. Needed for native USB
@@ -86,7 +88,7 @@
   {
       DateTime now = rtc.now();
 
-      lcd.setCursor(1, 0);
+      lcd.setCursor(0, 0);
       lcd.write(1);
       lcd.print(" ");
 
@@ -135,17 +137,20 @@
       //AM PM srart
       if(now.hour() >= 12)
       {
-        lcd.print(" ");
+        // lcd.print(" ");
         lcd.print("PM");
       }
       else
       {
-        lcd.print(" ");
+        // lcd.print(" ");
         lcd.print("AM");
       }
       //AM PM end
-
-      lcd.print("  ");
+      //Print days name start
+      lcd.print(" ");
+      // lcd.write(5);   
+      lcd.print(daysOfTheWeek[now.dayOfTheWeek()]);      
+      //Print days name end
       // time end
 
       // date start
