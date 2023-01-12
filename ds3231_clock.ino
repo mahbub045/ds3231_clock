@@ -111,7 +111,14 @@
       else
       {
         int Hour=now.hour();
-        lcd.print(Hour, DEC);
+        if(Hour < 10)
+          {
+            lcd.print("0");
+            lcd.print(Hour, DEC);
+          }
+          else{
+            lcd.print(Hour, DEC);          
+          }
       }
 
       lcd.print(':');
