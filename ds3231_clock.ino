@@ -50,7 +50,17 @@
     0b01000,
     0b01001,
     0b00110
-  }; 
+  };
+  byte daySign[8] = {
+    0b00000,
+    0b00000,
+    0b10101,
+    0b01110,
+    0b11011,
+    0b01110,
+    0b10101,
+    0b00000
+}; 
 
 
   void setup ()
@@ -64,7 +74,7 @@
       lcd.createChar(2, Calendar);
       lcd.createChar(3, Thermometer);
       lcd.createChar(4, degreeCentigrade); 
-      // lcd.createChar(5, daySign);     
+      lcd.createChar(5, daySign);     
 
   #ifndef ESP8266
       while (!Serial); // wait for serial port to connect. Needed for native USB
@@ -90,7 +100,7 @@
 
       lcd.setCursor(0, 0);
       lcd.write(1);
-      lcd.print(" ");
+      // lcd.print(" ");
 
       if(now.hour() == 0)
       {
@@ -153,12 +163,17 @@
         lcd.print("AM");
       }
       //AM PM end
-      //Print days name start
-      lcd.print(" ");
-      // lcd.write(5);   
-      lcd.print(daysOfTheWeek[now.dayOfTheWeek()]);      
-      //Print days name end
       // time end
+
+      lcd.print(" ");
+      //temperature start
+      lcd.write(3);
+      int Temperature=(rtc.getTemperature());
+      lcd.print(Temperature);
+      lcd.write(4);
+      //temperature end
+
+      ///////////////////////////////////////////////////////////////////////////////////////
 
       // date start
       lcd.setCursor(0, 1);
@@ -187,11 +202,11 @@
       // date end
 
       lcd.print(" ");
+      //Print days name start
+      lcd.write(5);   
+      lcd.print(daysOfTheWeek[now.dayOfTheWeek()]);      
+      //Print days name end
 
-      //temperature start
-      lcd.write(3);
-      int Temperature=(rtc.getTemperature());
-      lcd.print(Temperature);
-      lcd.write(4);
-      //temperature end
+      
   }
+
