@@ -17,10 +17,7 @@ You do have to install the Library in your Arduino IDE environment before you ca
 
 * [Summary](#summary)
 * [About the DS3231](#about-the-ds3231)
-* [How to Install the Library](#installation)
-* [Functions Provided in the Library](#functions)
-* [Examples of Using the Library](#examples-of-use)
-
+* [How to Install](#installation)
 <hr>
 
 ## Summary
@@ -96,11 +93,29 @@ One point regarding the choice of battery may deserve consideration: the questio
 
 ### First Method
 
-![image](https://postimg.cc/cvzxmWL9)
-
 1. In the Arduino IDE, navigate to Sketch > Include Library > Manage Libraries
 1. Then the Library Manager will open and you will find a list of libraries that are already installed or ready for installation.
-1. Then search for DS3231 using the search bar.
-1. Click on the text area and then select the specific version and install it.
+1. Then search for RTClib(by Adafruit) using the search bar.
+1. Also search for LiquidCrystal I2C(by Frank de Brabander) using the search bar.
+1. Select the specific version and install those.
 
+#### Show Image:
+![lbr1](https://user-images.githubusercontent.com/54384173/213922261-1436a65a-8a97-45c4-b43b-917c3d02bb5b.png)
+<br>
+![lbr2](https://user-images.githubusercontent.com/54384173/213921893-7f5ee593-d80b-4fd9-b50d-dfd71b1a3b9d.png)
 
+### Second Method
+
+#### Connection
+
+*Connect RTC module and 16x2 I2C display with the Arduino(follow the Image).
+
+![connections](https://user-images.githubusercontent.com/54384173/213926179-773a0442-36f7-4678-b1b2-009c305ba31b.png)
+
+### Third Method
+
+1. Download the code from github.
+1. Upload the code into the Arduino.
+
+## [Note: If you use my code, you can only follow the Installation step.]
+[back to top](#ds3231-library)
