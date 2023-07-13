@@ -91,7 +91,7 @@
       {
           Serial.println("RTC lost power, let's set the time!");
           rtc.adjust(DateTime(F(__DATE__), F(__TIME__)));//auto update from computer time
-          // rtc.adjust(DateTime(2023, 3, 21, 15, 24, 0));// to set the time manually
+          // rtc.adjust(DateTime(2023, 7, 14, 12, 8, 0));// to set the time manually
       }
   }
 
