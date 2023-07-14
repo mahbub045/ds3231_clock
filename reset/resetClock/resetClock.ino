@@ -41,8 +41,8 @@
         lcd.setCursor(0, 0);
         lcd.print("DATE");
         lcd.print(" ");
-        //lcd.print(daysOfTheWeek[now.dayOfTheWeek()]);
-        //lcd.print(" ");
+        lcd.print(daysOfTheWeek[now.dayOfTheWeek()]);
+        lcd.print(" ");
         lcd.print(now.day());
         lcd.print('/');
         lcd.print(now.month());
